@@ -1,5 +1,17 @@
 import { preprocess, preprocessAverage } from './filters/index.js';
 
+/**
+ * @typedef {{
+ *   video: HTMLVideoElement,
+ *   canvas: HTMLCanvasElement,
+ *   button: HTMLElement,
+ *   width: number,
+ *   height: number,
+ *   currentPreprocess: (arr: Uint8ClampedArray) => void,
+ *   streaming: boolean,
+ * }} Context
+ */
+
 const context = {
     /** @type {HTMLVideoElement} */ // @ts-expect-error
     video: document.getElementById('webcam'),
@@ -8,7 +20,8 @@ const context = {
     button: document.getElementById('start'),
     width: 320 * 2,
     height: 240 * 2,
-    currentPreprocess: preprocess, 
+    currentPreprocess: preprocess,
+    streaming: false,
 };
 
 
@@ -16,6 +29,7 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(stream  => {
         context.video.srcObject = stream;
         context.video.play();
+        context.streaming = true;
     })
     .catch(erro => {
         console.log('Erro: ', erro);
@@ -28,9 +42,7 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
  * @param {object} param0 
  * @param {HTMLCanvasElement} param0.canvas
  * @param {HTMLVideoElement} param0.video
- * @param {object} context
- * @param {number} context.width
- * @param {number} context.height
+ * @param {Context} context
  * @returns 
  */
 const setupSizes = ({ canvas, video }, context) => {
@@ -53,46 +65,36 @@ context.video.addEventListener('canplay', setupSizes(context, context), false);
 
 
 context.button.addEventListener('click', (event) => {
-    event.preventDefault();
-    startRendering();
-})
-// Revisar tudo daqui pra baixo
-function startRendering() {
-    const { width, height, canvas, video } = context;
-    var context2d = canvas.getContext('2d');
-    if (width && height) {
-    //   canvas.width = width;
-    //   canvas.height = height;
-      console.time('gray')
-      context2d.drawImage(video, 0, 0, width, height);
-
-      // rawData ImageData 
-      const rawData = context2d.getImageData(0, 0, width, height);
-
-      const arr = rawData.data;
-
-      context.currentPreprocess(arr);
-
-      // Initialize a new ImageData object
-      let imageData = new ImageData(arr, width);
-
-      // Draw image data to the canvas
-      context2d.putImageData(imageData, 0, 0);
-    
-      console.timeEnd('gray')
-      // var data = canvas.toDataURL('image/png');
-      // photo.setAttribute('src', data);
-    } else {
-      clearphoto();
+    if (context.streaming) {
+        startRendering(context);
     }
-    requestAnimationFrame(startRendering)
-}
+});
 
-function clearphoto() {
+/**
+ * 
+ * @param {Context} context 
+ */
+function startRendering(context) {
     const { width, height, canvas, video } = context;
-    var context = canvas.getContext('2d');
-    context.fillStyle = "#AAA";
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    const context2d = canvas.getContext('2d');
+   
+    console.time('timing');
 
-    var data = canvas.toDataURL('image/png');
-  }
+    context2d.drawImage(video, 0, 0, width, height);
+    /** @type {ImageData} */
+    const rawData = context2d.getImageData(0, 0, width, height);
+    /** @type {Uint8ClampedArray} */
+    const arr = rawData.data;
+
+    context.currentPreprocess(arr);
+
+    // Cria um novo objeto do tipo `ImageData`
+    let imageData = new ImageData(arr, width);
+
+    // Desenha a nova imagem no canvas
+    context2d.putImageData(imageData, 0, 0);
+
+    console.timeEnd('timing');
+
+    requestAnimationFrame(() => startRendering(context));
+}
