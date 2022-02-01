@@ -35,7 +35,11 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
         console.log('Erro: ', erro);
     })
 
-
+setInterval(() => {
+    context.currentPreprocess = context.currentPreprocess === preprocess
+        ? preprocessAverage
+        : preprocess;
+}, 1000);
 
 /**
  * 
