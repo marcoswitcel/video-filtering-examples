@@ -1,4 +1,14 @@
-import { preprocess, preprocessAverage } from './filters/index.js';
+import {
+    preprocessAverage,
+    preprocessAverageBy2,
+    preprocessShades,
+    preprocessShades2,
+    preprocessRed,
+    preprocessGreen,
+    preprocessBlue,
+    preprocessMax,
+    preprocessMin,
+} from './filters/index.js';
 
 /**
  * @typedef {{
@@ -20,7 +30,7 @@ const context = {
     button: document.getElementById('start'),
     width: 320 * 2,
     height: 240 * 2,
-    currentPreprocess: preprocess,
+    currentPreprocess: preprocessAverage,
     streaming: false,
 };
 
@@ -34,12 +44,6 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .catch(erro => {
         console.log('Erro: ', erro);
     })
-
-setInterval(() => {
-    context.currentPreprocess = context.currentPreprocess === preprocess
-        ? preprocessAverage
-        : preprocess;
-}, 1000);
 
 /**
  * 
@@ -102,3 +106,27 @@ function startRendering(context) {
 
     requestAnimationFrame(() => startRendering(context));
 }
+
+/** @type {NodeListOf<HTMLInputElement>} */
+const radios = document.querySelectorAll('.radio-input');
+
+const map = {
+    average: preprocessAverage,
+    averageBy2: preprocessAverageBy2,
+    shades: preprocessShades,
+    shades2: preprocessShades2,
+    preprocessRed: preprocessRed,
+    preprocessGreen: preprocessGreen,
+    preprocessBlue: preprocessBlue,
+    preprocessMax: preprocessMax,
+    preprocessMin: preprocessMin,
+};
+
+radios.forEach((radioElement) => {
+    radioElement.addEventListener('change', (event) => {
+        const newPreprocess = map[radioElement.value];
+        if (newPreprocess) {
+            context.currentPreprocess = newPreprocess;
+        }
+    });
+})

@@ -5,13 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black and White Filter</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <video id="webcam">Seu dispositivo não possue suporte a webcam</video>
+    <div class="wrapper">
+        <video id="webcam" class="view">Seu dispositivo não possue suporte a webcam</video>
+        <canvas id="display" class="view"></canvas>
+    </div>
     <button id="start" type="button">
         Começar
     </button>
-    <canvas id="display"></canvas>
+    <div class="radios">
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="average">
+            Média dos três canais
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="averageBy2">
+            Média do valor máximo e mínimo
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="shades">
+            shades
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="shades2">
+            shades2
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="preprocessRed">
+            preprocessRed
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="preprocessGreen">
+            preprocessGreen
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="preprocessBlue">
+            preprocessBlue
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="preprocessMax">
+            preprocessMax
+        </label>
+        <label>
+            <input class="radio-input" type="radio" name="filter" value="preprocessMin">
+            preprocessMin
+        </label>
+    </div>
     <script type="module" src="./index.js"></script>
 </body>
 </html>
