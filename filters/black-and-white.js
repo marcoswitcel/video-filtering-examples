@@ -1,4 +1,11 @@
-export function preprocessAverage(arr) {
+
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessAverage(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
              
@@ -11,7 +18,13 @@ export function preprocessAverage(arr) {
     }
 }
 
-export function preprocessAverageBy2(arr) {
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessAverageBy2(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         const gray = ( Math.max(arr[i + 0] , arr[i + 1] , arr[i + 2]) + Math.min(arr[i + 0] , arr[i + 1] , arr[i + 2]) ) / 2
@@ -23,8 +36,13 @@ export function preprocessAverageBy2(arr) {
     }
 }
 
-// Original
-export function preprocessShades(arr) {
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessShades(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         
@@ -40,8 +58,13 @@ export function preprocessShades(arr) {
     }
 }
 
-// Original
-export function preprocessShades2(arr) {
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessShades2(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         arr[i + 0] = Math.round( (arr[i + 0] + 1) / 64) * 64 - 1;    // R value
@@ -51,7 +74,13 @@ export function preprocessShades2(arr) {
     }
 }
 
-export function preprocessRed(arr) {
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessRed(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         const gray = arr[i + 0]
@@ -61,7 +90,14 @@ export function preprocessRed(arr) {
         arr[i + 3] = 255;  // A value
     }
 }
-export function preprocessGreen(arr) {
+
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessGreen(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         const gray = arr[i + 1]
@@ -71,7 +107,14 @@ export function preprocessGreen(arr) {
         arr[i + 3] = 255;  // A value
     }
 }
-export function preprocessBlue(arr) {
+
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessBlue(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         const gray = arr[i + 2]
@@ -81,7 +124,14 @@ export function preprocessBlue(arr) {
         arr[i + 3] = 255;  // A value
     }
 }
-export function preprocessMax(arr) {
+
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessMax(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         const gray = Math.max(arr[i + 0], arr[i + 1], arr[i + 2]);
@@ -91,7 +141,14 @@ export function preprocessMax(arr) {
         arr[i + 3] = 255;  // A value
     }
 }
-export function preprocessMin(arr) {
+
+/**
+ * @param {ImageData} imageDataIn
+ * @param {ImageData} imageDataOut
+ * @return {void}
+ */
+export function preprocessMin(imageDataIn, imageDataOut) {
+    const arr = imageDataIn.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arr.length; i += 4) {
         const gray = Math.min(arr[i + 0], arr[i + 1], arr[i + 2]);

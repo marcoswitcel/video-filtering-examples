@@ -17,7 +17,7 @@ import {
  *   button: HTMLElement,
  *   width: number,
  *   height: number,
- *   currentPreprocess: (arr: Uint8ClampedArray) => void,
+ *   currentPreprocess: (imageDataIn: ImageData, imageDataOut: ImageData) => void,
  *   streaming: boolean,
  * }} Context
  */
@@ -90,17 +90,18 @@ function startRendering(context) {
 
     context2d.drawImage(video, 0, 0, width, height);
     /** @type {ImageData} */
-    const rawData = context2d.getImageData(0, 0, width, height);
-    /** @type {Uint8ClampedArray} */
-    const arr = rawData.data;
+    const imageDataIn = context2d.getImageData(0, 0, width, height);
 
-    context.currentPreprocess(arr);
-
-    // Cria um novo objeto do tipo `ImageData`
-    let imageData = new ImageData(arr, width);
+    /**
+     * @obs com os filtros atuais a entrada e a saída podem ser a mesma imagem,
+     * pois eles alteram pixel e pixel e precisam apenas da informação uma vez.
+     * Para os futuros filtros baseados em múltiplos pixels, precisarei armazenar o novo
+     * valor de cada pixel em um buffer diferente.
+     */
+    context.currentPreprocess(imageDataIn, imageDataIn);
 
     // Desenha a nova imagem no canvas
-    context2d.putImageData(imageData, 0, 0);
+    context2d.putImageData(imageDataIn, 0, 0);
 
     console.timeEnd('timing');
 
