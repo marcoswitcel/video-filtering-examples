@@ -1,4 +1,6 @@
 
+const { min, max, round } = Math;
+
 /**
  * @param {ImageData} imageDataIn
  * @param {ImageData} imageDataOut
@@ -29,7 +31,9 @@ export function preprocessAverageBy2(imageDataIn, imageDataOut) {
     const arrOut = imageDataOut.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arrIn.length; i += 4) {
-        const gray = ( Math.max(arrIn[i + 0] , arrIn[i + 1] , arrIn[i + 2]) + Math.min(arrIn[i + 0] , arrIn[i + 1] , arrIn[i + 2]) ) / 2
+        const gray = (
+            max(arrIn[i+0], arrIn[i+1], arrIn[i+2]) + min(arrIn[i+0], arrIn[i+1], arrIn[i+2])
+        ) / 2;
         
         arrOut[i + 0] = gray;    // R value
         arrOut[i + 1] = gray;  // G value
@@ -71,9 +75,9 @@ export function preprocessShades2(imageDataIn, imageDataOut) {
     const arrOut = imageDataOut.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arrIn.length; i += 4) {
-        arrOut[i + 0] = Math.round( (arrIn[i + 0] + 1) / 64) * 64 - 1;    // R value
-        arrOut[i + 1] = Math.round( (arrIn[i + 1] + 1) / 64) * 64 - 1;  // G value
-        arrOut[i + 2] = Math.round( (arrIn[i + 2] + 1) / 64) * 64 - 1;    // B value
+        arrOut[i + 0] = round((arrIn[i + 0] + 1) / 64) * 64 - 1;    // R value
+        arrOut[i + 1] = round((arrIn[i + 1] + 1) / 64) * 64 - 1;  // G value
+        arrOut[i + 2] = round((arrIn[i + 2] + 1) / 64) * 64 - 1;    // B value
         arrOut[i + 3] = 255;  // A value
     }
 }
@@ -142,7 +146,7 @@ export function preprocessMax(imageDataIn, imageDataOut) {
     const arrOut = imageDataOut.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arrIn.length; i += 4) {
-        const gray = Math.max(arrIn[i + 0], arrIn[i + 1], arrIn[i + 2]);
+        const gray = max(arrIn[i + 0], arrIn[i + 1], arrIn[i + 2]);
         arrOut[i + 0] = gray;    // R value
         arrOut[i + 1] = gray;  // G value
         arrOut[i + 2] = gray;    // B value
@@ -160,7 +164,7 @@ export function preprocessMin(imageDataIn, imageDataOut) {
     const arrOut = imageDataOut.data;
     // Itera sobre cada pixel
     for (let i = 0; i < arrIn.length; i += 4) {
-        const gray = Math.min(arrIn[i + 0], arrIn[i + 1], arrIn[i + 2]);
+        const gray = min(arrIn[i + 0], arrIn[i + 1], arrIn[i + 2]);
         arrOut[i + 0] = gray;    // R value
         arrOut[i + 1] = gray;  // G value
         arrOut[i + 2] = gray;    // B value
