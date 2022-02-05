@@ -91,6 +91,7 @@ function startRendering(context) {
     context2d.drawImage(video, 0, 0, width, height);
     /** @type {ImageData} */
     const imageDataIn = context2d.getImageData(0, 0, width, height);
+    const imageDataOut = new ImageData(imageDataIn.width, imageDataIn.height);
 
     /**
      * @obs com os filtros atuais a entrada e a saída podem ser a mesma imagem,
@@ -98,10 +99,10 @@ function startRendering(context) {
      * Para os futuros filtros baseados em múltiplos pixels, precisarei armazenar o novo
      * valor de cada pixel em um buffer diferente.
      */
-    context.currentPreprocess(imageDataIn, imageDataIn);
+    context.currentPreprocess(imageDataIn, imageDataOut);
 
     // Desenha a nova imagem no canvas
-    context2d.putImageData(imageDataIn, 0, 0);
+    context2d.putImageData(imageDataOut, 0, 0);
 
     console.timeEnd('timing');
 
