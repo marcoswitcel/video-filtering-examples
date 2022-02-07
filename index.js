@@ -8,6 +8,7 @@ import {
     preprocessBlue,
     preprocessMax,
     preprocessMin,
+    filter,
 } from './filters/index.js';
 
 /**
@@ -122,6 +123,7 @@ const map = {
     preprocessBlue: preprocessBlue,
     preprocessMax: preprocessMax,
     preprocessMin: preprocessMin,
+    filter: filter,
 };
 
 radios.forEach((radioElement) => {
