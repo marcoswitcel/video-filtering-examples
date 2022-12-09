@@ -16,3 +16,4 @@ Coloquei logo a seguir alguns dos links que li para realizar a implementação.
 * Site [ml5.js: What is a Convolutional Neural Network Part 1](https://thecodingtrain.com/learning/ml5/8.2-cnn-1.html)
 * GitHub: [ml5.js: What is a Convolutional Neural Network Part 1](https://github.com/CodingTrain/website/tree/main/learning/ml5/8.2-cnn-1/P5)
 * Exemplo de filtro gaussiano: [https://aryamansharda.medium.com/image-filters-gaussian-blur-eb36db6781b1](https://aryamansharda.medium.com/image-filters-gaussian-blur-eb36db6781b1)
+* Mais exemplos de filtro gaussiano: [https://fiveko.com/gaussian-blur-filter/](https://fiveko.com/gaussian-blur-filter/), [https://fiveko.com/gaussian-filter-in-pure-javascript/](https://fiveko.com/gaussian-filter-in-pure-javascript/).
