@@ -1,3 +1,4 @@
+import { setup } from './editable-table.js';
 import {
     preprocessAverage,
     preprocessAverageBy2,
@@ -138,3 +139,5 @@ radios.forEach((radioElement) => {
         }
     });
 })
+
+setup();
