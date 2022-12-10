@@ -8,7 +8,9 @@ import {
     preprocessBlue,
     preprocessMax,
     preprocessMin,
-    filter,
+    filterEdgeDetection1,
+    filterEdgeDetection2,
+    filterOther,
 } from './filters/index.js';
 
 /**
@@ -123,7 +125,9 @@ const map = {
     preprocessBlue: preprocessBlue,
     preprocessMax: preprocessMax,
     preprocessMin: preprocessMin,
-    filter: filter,
+    filterEdgeDetection1: filterEdgeDetection1,
+    filterEdgeDetection2: filterEdgeDetection2,
+    filterOther: filterOther,
 };
 
 radios.forEach((radioElement) => {

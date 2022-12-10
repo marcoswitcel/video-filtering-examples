@@ -173,70 +173,78 @@ export function preprocessMin(imageDataIn, imageDataOut) {
 }
 
 /**
- * @param {ImageData} imageDataIn
- * @param {ImageData} imageDataOut
- * @return {void}
+ * Monta filtros baseados em uma matriz de pesos (convolution kernel)
+ * @param {number[][]} convolutionKernel 
+ * @returns {(imageDataIn: ImageData, imageDataOut: ImageData) => void}
  */
-export function filter(imageDataIn, imageDataOut) {
-    const bufferIn = imageDataIn.data;
-    const bufferOut = imageDataOut.data;
-    const imageWidth = imageDataIn.width;
-    const bufferLenght = bufferIn.length;
-
-    const factorsMatrix = [
-        [-1, 1, 0],
-        [-1, 1, 0],
-        [-1, 1, 0]
-    ];
-
-    const factorsMatrix3 = [
-        [0.6879708798940651,0.3046987792757534,0.5869980564541435],
-        [0.9734726988532567,0.9808424020144173,0.27211705200269165],
-        [0.9786995967103538,0.5628670234039697,0.536443246643886]
-    ];
-
+export function makeFilter(convolutionKernel) {
+    const factorsMatrix = convolutionKernel;
     /**
-     * Gausian Blur
-     * @url https://aryamansharda.medium.com/image-filters-gaussian-blur-eb36db6781b1#:~:text=TLDR%3A%20A%20Gaussian%20blur%20is,values%20for%20the%20blurred%20image.
+     * @param {ImageData} imageDataIn
+     * @param {ImageData} imageDataOut
+     * @return {void}
      */
-    const factorsMatrix2 = [
-        [4, 0, 0],
-        [0, 0, 0],
-        [0, 0, -4],
-    ];
-
-    for (let i = 0, iter = 0; i < bufferLenght; i += 4) {
-        iter = i + 1;
-        // borda azul 
-        if (   iter < imageWidth*4 
-            || iter > bufferLenght - imageWidth * 4
-            || (iter % (imageWidth * 4)) < 2
-            || (iter % (imageWidth * 4)) > (imageWidth * 4 - 4)
-        ) {
-
-            bufferOut[i + 0] = 0;
-            bufferOut[i + 1] = 0;
-            bufferOut[i + 2] = 255;
-            bufferOut[i + 3] = 255;
-            continue;
-        }
-        
-        let sumR = 0;
-        let sumG = 0;
-        let sumB = 0;
-        for (let j = -1; j < 2; j++) {
-            for (let k = -1; k < 2; k++) {
-                const factor = factorsMatrix[k+1][j+1];
-                let index = i + (j * 4) + (k * imageWidth * 4);
-                sumR += bufferIn[index + 0] * factor;
-                sumG += bufferIn[index + 1] * factor;
-                sumB += bufferIn[index + 2] * factor;
+    return function filter(imageDataIn, imageDataOut) {
+        const bufferIn = imageDataIn.data;
+        const bufferOut = imageDataOut.data;
+        const imageWidth = imageDataIn.width;
+        const bufferLenght = bufferIn.length;
+    
+        for (let i = 0, iter = 0; i < bufferLenght; i += 4) {
+            iter = i + 1;
+            // borda azul 
+            if (   iter < imageWidth*4 
+                || iter > bufferLenght - imageWidth * 4
+                || (iter % (imageWidth * 4)) < 2
+                || (iter % (imageWidth * 4)) > (imageWidth * 4 - 4)
+            ) {
+    
+                bufferOut[i + 0] = 0;
+                bufferOut[i + 1] = 0;
+                bufferOut[i + 2] = 255;
+                bufferOut[i + 3] = 255;
+                continue;
             }
+            
+            let sumR = 0;
+            let sumG = 0;
+            let sumB = 0;
+            for (let j = -1; j < 2; j++) {
+                for (let k = -1; k < 2; k++) {
+                    const factor = factorsMatrix[k+1][j+1];
+                    let index = i + (j * 4) + (k * imageWidth * 4);
+                    sumR += bufferIn[index + 0] * factor;
+                    sumG += bufferIn[index + 1] * factor;
+                    sumB += bufferIn[index + 2] * factor;
+                }
+            }
+
+            bufferOut[i + 0] = sumR;    // R value
+            bufferOut[i + 1] = sumG;  // G value
+            bufferOut[i + 2] = sumB;    // B value
+            bufferOut[i + 3] = 255;  // A value
         }
-        // console.log(sumB);
-        bufferOut[i + 0] = sumR;    // R value
-        bufferOut[i + 1] = sumG;  // G value
-        bufferOut[i + 2] = sumB;    // B value
-        bufferOut[i + 3] = 255;  // A value
     }
 }
+
+export const filterEdgeDetection1 = makeFilter([
+    [-1, 1, 0],
+    [-1, 1, 0],
+    [-1, 1, 0]
+]);
+
+/**
+ * Gausian Blur
+ * @url https://aryamansharda.medium.com/image-filters-gaussian-blur-eb36db6781b1#:~:text=TLDR%3A%20A%20Gaussian%20blur%20is,values%20for%20the%20blurred%20image.
+ */
+export const filterEdgeDetection2 = makeFilter([
+    [4, 0, 0],
+    [0, 0, 0],
+    [0, 0, -4],
+]);
+
+export const filterOther = makeFilter([
+    [0.6879708798940651,0.3046987792757534,0.5869980564541435],
+    [0.9734726988532567,0.9808424020144173,0.27211705200269165],
+    [0.9786995967103538,0.5628670234039697,0.536443246643886]
+]);
