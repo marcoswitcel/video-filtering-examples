@@ -140,4 +140,4 @@ radios.forEach((radioElement) => {
     });
 })
 
-setup();
+setup(context);

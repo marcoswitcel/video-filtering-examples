@@ -1,6 +1,9 @@
+import { makeFilter } from './filters/index.js';
+
 const { assert } = console;
 
-const doomId = 'matrixWrapper'
+const rootElementId = 'matrixWrapper'
+const buttonElementId = 'matrix-apply';
 const errorClass = 'error';
 
 /**
@@ -30,10 +33,15 @@ function convertListOfNodesToArray(nodes) {
     return result;
 }
 
-export function setup() {
-    const rootElement = document.getElementById(doomId);
+/**
+ * @param {import('./index.js').Context} context Informações contextuais
+ */
+export function setup(context) {
+    const rootElement = document.getElementById(rootElementId);
+    const buttonElement = document.getElementById(buttonElementId);
 
-    assert(!!rootElement, `O elemento com id ${doomId} não pode ser encontrado`);
+    assert(!!rootElement, `O elemento com id ${rootElementId} não pode ser encontrado`);
+    assert(!!buttonElement, `O elemento com id ${buttonElementId} não pode ser encontrado`);
 
     rootElement.querySelectorAll('td').forEach(tdElement => {
         tdElement.addEventListener('keypress', () => {
@@ -46,5 +54,12 @@ export function setup() {
                 tdElement.classList.remove(errorClass)
             }
         })
+    });
+
+    buttonElement.addEventListener('click', () => {
+        const tdElements = rootElement.querySelectorAll('td');
+        assert(!!tdElements.length, "Não conseguiu achar os elementos 'td'");
+        const matrix = convertListOfNodesToArray(tdElements);
+        context.currentPreprocess = makeFilter(matrix);
     });
 }
