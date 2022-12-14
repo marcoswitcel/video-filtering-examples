@@ -76,9 +76,12 @@ const setupSizes = ({ canvas, video }, context) => {
 context.video.addEventListener('canplay', setupSizes(context, context), false);
 
 
-context.button.addEventListener('click', (event) => {
+context.button.addEventListener('click', function handler(event) {
+    context.canvas.classList.remove('d-none');
+    
     if (context.streaming) {
         startRendering(context);
+        context.button.removeEventListener('click', handler);
     }
 });
 
