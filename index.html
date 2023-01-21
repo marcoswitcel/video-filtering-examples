@@ -21,102 +21,110 @@
             Aplicar filtro
         </button>
     </div>
-    <div class="radios p-2 border border-1 rounded my-3 mx-5">
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="average">
-                Tons de cinza (média dos três canais)
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="averageBy2">
-                Tons de cinza (média do valor máximo e mínimo dos canais)
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="shades">
-                Paleta de cinzas reduzida
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="shades2">
-                Paleta de cores reduzida
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessRed">
-                Cinza baseado no canal vermelho
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessGreen">
-                Cinza baseado no canal verde
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessBlue">
-                Cinza baseado no canal azul
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessMax">
-                Cinza baseado no canal com o maior valor
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessMin">
-                Cinza baseado no canal com o menor valor
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="filterEdgeDetection1">
-                Filtro que enfatiza bordas (exemplo 1)
-            </label>
-        </div>
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input radio-input" type="radio" name="filter" value="filterEdgeDetection2">
-                Filtro que enfatiza bordas (exemplo 2)
-            </label>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="radios p-3 border border-1 rounded my-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="average">
+                            Tons de cinza (média dos três canais)
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="averageBy2">
+                            Tons de cinza (média do valor máximo e mínimo dos canais)
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="shades">
+                            Paleta de cinzas reduzida
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="shades2">
+                            Paleta de cores reduzida
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessRed">
+                            Cinza baseado no canal vermelho
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessGreen">
+                            Cinza baseado no canal verde
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessBlue">
+                            Cinza baseado no canal azul
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessMax">
+                            Cinza baseado no canal com o maior valor
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="preprocessMin">
+                            Cinza baseado no canal com o menor valor
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="filterEdgeDetection1">
+                            Filtro que enfatiza bordas (exemplo 1)
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input radio-input" type="radio" name="filter" value="filterEdgeDetection2">
+                            Filtro que enfatiza bordas (exemplo 2)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="matrix p-3 border border-1 rounded my-3 d-flex flex-column align-items-center" id="matrixWrapper">
+                    <div class="mt-3 text-center">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td contenteditable="true">0</td>
+                                    <td contenteditable="true">0</td>
+                                    <td contenteditable="true">0</td>
+                                </tr>
+                                <tr>
+                                    <td contenteditable="true">0</td>
+                                    <td contenteditable="true">1</td>
+                                    <td contenteditable="true">0</td>
+                                </tr>
+                                <tr>
+                                    <td contenteditable="true">0</td>
+                                    <td contenteditable="true">0</td>
+                                    <td contenteditable="true">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <button type="button" class="btn btn-primary" id="matrix-apply">
+                            Filtrar usando essa matriz
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="matrix p-2 border border-1 rounded my-3 mx-5 d-flex flex-column align-items-center" id="matrixWrapper">
-            <div class="mt-3 text-center">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td contenteditable="true">0</td>
-                            <td contenteditable="true">0</td>
-                            <td contenteditable="true">0</td>
-                        </tr>
-                        <tr>
-                            <td contenteditable="true">0</td>
-                            <td contenteditable="true">1</td>
-                            <td contenteditable="true">0</td>
-                        </tr>
-                        <tr>
-                            <td contenteditable="true">0</td>
-                            <td contenteditable="true">0</td>
-                            <td contenteditable="true">0</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="mt-3 text-center">
-                <button type="button" class="btn btn-primary" id="matrix-apply">
-                    Filtrar usando essa matriz
-                </button>
-            </div>
-        </div>
     <script type="module" src="./index.js"></script>
 </body>
 </html>
