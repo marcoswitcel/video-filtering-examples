@@ -2,6 +2,8 @@
 
 O objetivo com essas implementações era aprender mais sobre filtros gráficos.
 
+Link para testar: [https://marcoswitcel.github.io/video-filtering-examples/](https://marcoswitcel.github.io/video-filtering-examples/)
+
 ## Para rodar
 
 Apenas clone o projeto e suba um servidor HTTP na pasta raiz, daí é só acessar o `index.html`. Para desenvolvimento eu usei o [Visual Studio Code](https://code.visualstudio.com/) e a extensão [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
